@@ -9,26 +9,26 @@ namespace Alura.LeilaoOnline.WebApp.Dados.EfCore
     {
         AppDbContext _context;
 
-        public LeilaoDaoComEfCore()
+        public LeilaoDaoComEfCore(AppDbContext context)
         {
-            _context = new AppDbContext();
+            _context = context;
+        }
+        
+        public Leilao BuscarLeilaoPorId(int id)
+        {
+            return _context.Leiloes.First(l => l.Id == id);
         }
 
-        public IEnumerable<Categoria> BuscarCategorias()
-        {
-            return _context.Categorias.ToList();
-        }
-
-        public IEnumerable<Leilao> BuscarLeiloes()
+        public IEnumerable<Leilao> BuscarTodosLeiloes()
         {
             return _context.Leiloes
                 .Include(l => l.Categoria)
                 .ToList();
         }
 
-        public Leilao BuscarPorId(int id)
+        public IEnumerable<Categoria> BuscarTodasCategorias()
         {
-            return _context.Leiloes.First(l => l.Id == id);
+            return _context.Categorias.ToList();
         }
 
         public void Incluir(Leilao leilao)
