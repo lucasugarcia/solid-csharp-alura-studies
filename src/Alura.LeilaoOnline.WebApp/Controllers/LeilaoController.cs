@@ -1,6 +1,5 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Alura.LeilaoOnline.WebApp.Dados.EfCore;
 using Alura.LeilaoOnline.WebApp.Dados;
 using Alura.LeilaoOnline.WebApp.Models;
 using System;
@@ -11,9 +10,9 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
     {
         ILeilaoDao _dao;
 
-        public LeilaoController()
+        public LeilaoController(ILeilaoDao dao)
         {
-            _dao = new LeilaoDaoComEfCore();
+            _dao = dao;
         }
 
         public IActionResult Index()
